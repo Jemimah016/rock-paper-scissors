@@ -1,7 +1,7 @@
 let humanScore = 0;
 let computerScore = 0;
 
-const result = document.querySelector("#result");
+const results = document.querySelector("#results");
 
 const rockBtn = document.querySelector("#rock");
 const paperBtn = document.querySelector("#paper");
