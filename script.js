@@ -8,64 +8,59 @@ const paperBtn = document.querySelector("#paper");
 const scissorsBtn = document.querySelector("#scissors");
 
 function getComputerChoice() {
-    let random = Math.random();
+  const random = Math.random();
 
-    if (random < 0.33) return "rock";
-    else if (random < 0.66) return "paper";
-    else return "scissors";
+  if (random < 0.33) return "rock";
+  else if (random < 0.66) return "paper";
+  else return "scissors";
 }
 
 function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
+  humanChoice = humanChoice.toLowerCase();
 
-    if (humanChoice === computerChoice) {
-        result.textContent = `Draw! Both chose ${humanChoice}`;
-    }
-    else if (
-        (humanChoice === "rock" && computerChoice === "scissors") ||
-        (humanChoice === "paper" && computerChoice === "rock") ||
-        (humanChoice === "scissors" && computerChoice === "paper")
-    ) {
-        humanScore++;
-        result.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
-    }
-    else {
-        computerScore++;
-        result.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
-    }
+  if (humanChoice === computerChoice) {
+    results.textContent = "It's a draw!";
+  } 
+  else if (
+    (humanChoice === "rock" && computerChoice === "scissors") ||
+    (humanChoice === "paper" && computerChoice === "rock") ||
+    (humanChoice === "scissors" && computerChoice === "paper")
+  ) {
+    humanScore++;
+    results.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+  } 
+  else {
+    computerScore++;
+    results.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+  }
 
-    updateScore();
-}
+  results.textContent += `\nScore: You ${humanScore} - Computer ${computerScore}`;
 
-function updateScore() {
-    const scoreBoard = `Score — You: ${humanScore} | Computer: ${computerScore}`;
-    result.textContent += `\n${scoreBoard}`;
+  if (humanScore === 5) {
+    results.textContent = "🎉 You win the game!";
+    disableButtons();
+  }
 
-    if (humanScore === 5) {
-        result.textContent = "🎉 You won the game!";
-        disableButtons();
-    }
-    else if (computerScore === 5) {
-        result.textContent = "💀 Computer won the game!";
-        disableButtons();
-    }
+  if (computerScore === 5) {
+    results.textContent = "💀 Computer wins the game!";
+    disableButtons();
+  }
 }
 
 function disableButtons() {
-    rockBtn.disabled = true;
-    paperBtn.disabled = true;
-    scissorsBtn.disabled = true;
+  rockBtn.disabled = true;
+  paperBtn.disabled = true;
+  scissorsBtn.disabled = true;
 }
 
-
 rockBtn.addEventListener("click", () => {
-    playRound("rock", getComputerChoice());
+  playRound("rock", getComputerChoice());
 });
 
 paperBtn.addEventListener("click", () => {
-    playRound("paper", getComputerChoice());
+  playRound("paper", getComputerChoice());
 });
 
 scissorsBtn.addEventListener("click", () => {
-    playRound("scissors", getComputerChoice());
+  playRound("scissors", getComputerChoice());
 });
